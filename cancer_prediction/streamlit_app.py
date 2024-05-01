@@ -55,9 +55,7 @@ if app_mode == "Home":
 elif app_mode == "Train a new model":
     st.header("Train a new model")
     uploaded_file = st.file_uploader("Upload your dataset (CSV format)", type="csv")
-    model_name = st.text_input(
-        "Enter a name for your model (without extension)", value="cancer_model"
-    )
+    model_name = st.text_input("Enter a name for your model (without extension)", value="cancer_model")
 
     if uploaded_file is not None and model_name:
         data = pd.read_csv(uploaded_file)
@@ -69,10 +67,7 @@ elif app_mode == "Train a new model":
             st.success(f'Model "{model_name}" trained and saved successfully.')
 
 
-if (
-    app_mode == "Load model and predict"
-    or app_mode == "Manual data entry for prediction"
-):
+if app_mode == "Load model and predict" or app_mode == "Manual data entry for prediction":
     st.header("Select a model for prediction")
     model_files = list_saved_models(MODELS_DIR)
     selected_model_file = st.selectbox("Select a model file", model_files)
@@ -80,14 +75,12 @@ if (
     model = load_model(path)
 
     if app_mode == "Load model and predict":
-        uploaded_file = st.file_uploader(
-            "Upload your dataset for prediction (CSV format)", type="csv"
-        )
+        uploaded_file = st.file_uploader("Upload your dataset for prediction (CSV format)", type="csv")
         if uploaded_file is not None:
             test_data = pd.read_csv(uploaded_file)
-            predictions, accuracy = model.predict(
-                test_data.drop("target", axis=1)
-            ), model.accuracy(test_data.drop("target", axis=1), test_data["target"])
+            predictions, accuracy = model.predict(test_data.drop("target", axis=1)), model.accuracy(
+                test_data.drop("target", axis=1), test_data["target"]
+            )
             st.write("Predictions:", predictions)
             st.write("Accuracy:", accuracy)
 
@@ -113,6 +106,4 @@ if (
             prediction = model.predict(input_df)
 
             # Display the prediction result
-            st.write(
-                f"Prediction: {prediction[0][0]} with confidence: {prediction[0][1]}"
-            )
+            st.write(f"Prediction: {prediction[0][0]} with confidence: {prediction[0][1]}")
