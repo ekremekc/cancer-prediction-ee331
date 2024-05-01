@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "cancer-prediction-ee331"
-version = "0.1.0"
+version = "0.1.1"
 description = "A model to predict a cancer"
 authors = ["Ekrem Ekici <65715006+ekremekc@users.noreply.github.com>"]
 license = "MIT"
